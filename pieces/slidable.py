@@ -1,6 +1,8 @@
+from piece import Piece
+
 class Slidable(Piece):
-    def __init__(self):
-        super(Piece, self).__init__(color, board, pos)
+    def __init__(self, color, board, pos):
+        super(Slidable, self).__init__(color, board, pos)
         # pass
 
     HORIZONTAL_DIRS = [
