@@ -6,8 +6,8 @@ class Steppable(Piece):
 
     def moves(self):
         moves = []
-        for dx, dy in move_diffs:
-            cur_x, cur_y = pos
+        for dx, dy in self._move_diffs():
+            cur_x, cur_y = self.pos
             pos = [cur_x + dx, cur_y + dy]
 
             if not self.board.is_valid_pos(pos): continue
@@ -15,8 +15,8 @@ class Steppable(Piece):
             if self.board.is_empty(pos):
                 moves.append(pos)
             elif self.board.get_piece(pos).color != self.color:
-                moves << pos
+                moves.append(pos)
         return moves
 
-    def __move_diffs(self):
+    def _move_diffs(self):
         pass

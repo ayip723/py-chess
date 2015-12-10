@@ -19,14 +19,20 @@ class Slidable(Piece):
         [1, 1]
     ]
 
+    def horizontal_dirs(self):
+        return Slidable.HORIZONTAL_DIRS
+
+    def diagonal_dirs(self):
+        return Slidable.DIAGONAL_DIRS
 
     def moves(self):
         moves = []
-        for dx, dy in self.move_dirs:
-            moves.concat(self.__grow_unblocked_moves_in_dir(dx, dy))
+        for dx, dy in self.move_dirs():
+            moves += (self.__grow_unblocked_moves_in_dir(dx, dy))
+        return moves
 
-    def __grow_unblocked_moves_in_dir(dx, dy):
-        cur_x, cur_y = pos
+    def __grow_unblocked_moves_in_dir(self, dx, dy):
+        cur_x, cur_y = self.pos
         moves = []
 
         while True:
@@ -35,10 +41,10 @@ class Slidable(Piece):
             if not self.board.is_valid_pos(pos):
                 break
 
-            if board.is_empty(pos):
+            if self.board.is_empty(pos):
                 moves.append(pos)
             else:
-                if self.board.get_piece(pos).color != color:
+                if self.board.get_piece(pos).color != self.color:
                     moves.append(pos)
                 break
         return moves

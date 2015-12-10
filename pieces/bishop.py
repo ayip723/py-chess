@@ -6,4 +6,7 @@ class Bishop(Slidable):
         super(Bishop, self).__init__(color, board, pos)
 
     def symbol(self):
-        return u'\u265d' if self.color == "white" else u'\u2657'
+        return u'\u2657' if self.color == "white" else u'\u265d'
+
+    def move_dirs(self):
+        return self.diagonal_dirs()

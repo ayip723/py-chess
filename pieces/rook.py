@@ -5,7 +5,7 @@ class Rook(Slidable):
         super(Rook, self).__init__(color, board, pos)
 
     def move_dirs(self):
-        return self.horizontal_dirs
+        return self.horizontal_dirs()
 
     def symbol(self):
         return u'\u2656' if self.color == "white" else u'\u265c'
