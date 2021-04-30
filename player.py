@@ -33,12 +33,6 @@ class HumanPlayer(object):
             os.system('clear')
             board.render()
 
-            # if from_pos:
-            #     print "%s's turn. Move to where?" % self.color
-            #     to_pos = raw_input()
-            # else:
-            #     print "%s's turn. Move from where?" % self.color
-            #     from_pos = raw_input()
             print "Current player: %s" % self.color
 
             from_pos = self.__get_pos("from pos:")
@@ -54,7 +48,6 @@ class HumanPlayer(object):
         while not self.__valid(pos):
             pos = raw_input()
 
-        # return pos
         return [HumanPlayer.NUMBER_DICT[pos[1]], HumanPlayer.LETTER_DICT[pos[0]]]
 
     def __valid(self, pos):

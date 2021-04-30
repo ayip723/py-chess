@@ -1,4 +1,3 @@
-# import pieces
 from pieces import *
 from pieces.bishop import Bishop
 from pieces.king import King
@@ -6,18 +5,8 @@ from pieces.knight import Knight
 from pieces.pawn import Pawn
 from pieces.queen import Queen
 from pieces.rook import Rook
-class Board(object):
-    # LETTER_DICT = {
-    #     0: 'a',
-    #     1: 'b',
-    #     2: 'c',
-    #     3: 'd',
-    #     4: 'e',
-    #     5: 'f',
-    #     6: 'g',
-    #     7: 'h'
-    # }
 
+class Board(object):
     LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     NUMBERS = ['1', '2', '3', '4', '5', '6', '7', '8']
 
@@ -39,11 +28,9 @@ class Board(object):
         back_pieces = [
             Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
         ]
-        # r = Rook()
         i = 7 if color == "white" else 0
         for j, p in enumerate(back_pieces):
             p(color, self, [i, j])
-        # pass
 
     def fill_pawn_row(self, color):
         i = 6 if color == "white" else 1
@@ -60,7 +47,6 @@ class Board(object):
         for i1, row in enumerate(self.grid):
             print Board.NUMBERS[i1],
             for i2, el in enumerate(row):
-                # str = el ? '_' : " %s" % el.symbol()
                 str = " %s" % el.symbol() if el else ' _'
                 print str,
             print Board.NUMBERS[i1]
@@ -72,10 +58,6 @@ class Board(object):
     def try_move_piece(self, turn_color, from_pos, to_pos):
         print "position:", from_pos, to_pos
         piece = self.grid[from_pos[0]][from_pos[1]]
-        # here i can also try using exception, but let's use true/false for the moment
-        # print "piece color:", piece.color
-        # print "turn_color:", turn_color
-        # print piece.moves()
         if piece.color != turn_color:
             print "You must move your own piece."
             return False
@@ -86,18 +68,14 @@ class Board(object):
             print "You cannot move into check"
             return False
 
-        # self.grid[to_pos] = piece
         self.grid[to_pos[0]][to_pos[1]] = piece
-        # self.grid[from_pos] = None
         self.grid[from_pos[0]][from_pos[1]] = None
         piece.pos = to_pos
         return True
 
     def move_piece(self, from_pos, to_pos):
         piece = self.grid[from_pos[0]][from_pos[1]]
-        # self.grid[to_pos] = piece
         self.grid[to_pos[0]][to_pos[1]] = piece
-        # self.grid[from_pos] = None
         self.grid[from_pos[0]][from_pos[1]] = None
         piece.pos = to_pos
 
@@ -121,19 +99,14 @@ class Board(object):
 
     def is_in_check(self, color):
         king_pos = self.__find_king(color).pos
-        # for p in self.pieces():
-        #     print p
-        #     print p.moves()
         return any([(p.color != color and king_pos in p.moves()) for p in self.pieces()])
 
     def get_piece(self, pos):
-        # may need to raise an exception
         i, j = pos
         return self.grid[i][j]
 
     def __find_king(self, color):
         for piece in self.pieces():
-            # print type(piece)
             if piece.color == color and type(piece) is King:
                 return piece
 
